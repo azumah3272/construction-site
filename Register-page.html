@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <h1>Register</h1>
+    <form action="">
+        <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class="form-group">
+            <label for="project-type">Project Type</label>
+            <select name="project-type" id="project-type">
+                <option value="" disabled selected>Select a project type</option>
+                <option value="commercial">Commercial</option>
+                <option value="residential">Residential</option>
+                <option value="industrial">Industrial</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="details">Project Details</label>
+            <textarea id="details" name="details" rows="4"
+                placeholder="Provide a brief description of your project"></textarea>
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+
+</html>

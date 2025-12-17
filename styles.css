@@ -1,0 +1,376 @@
+/* Styles for the Alpha Builders website */
+
+/* ---------- Global Styles ---------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Open Sans", "Poppins", sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  background-color: #f4f4f4;
+  color: #1a1a1a;
+}
+
+a {
+  text-decoration: none;
+  color: #004d99;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #ffa500;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Merriweather", "Roboto", sans-serif;
+  margin-bottom: 1.5rem;
+}
+
+h1 {
+  font-size: 3.5rem;
+  letter-spacing: -1.25px;
+}
+
+h2 {
+  font-size: 2.5rem;
+  letter-spacing: -1px;
+}
+
+h3 {
+  font-size: 1.5rem;
+  letter-spacing: -0.5px;
+}
+
+p {
+  font-size: 1rem;
+}
+
+/* ---------- Header Styles ---------- */
+header {
+  background-color: #004d99;
+  color: #fff;
+  padding: 50px 0;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("assets/hero-banner.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.primary-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+nav ul {
+  display: none;
+}
+
+nav img {
+  height: 60px;
+}
+
+.hero-content {
+  text-align: center;
+  padding-top: 50px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-content h1 {
+  background-image: linear-gradient(180deg, #cccccc, #004d99);
+
+  font-size: 2.5rem;
+  font-weight: 700;
+
+  -webkit-background-clip: text; /* Vendor prefix for compatibility */
+  background-clip: text;
+  color: transparent; /* Makes the actual text invisible, revealing the clipped background */
+
+  animation: fadeInUp 2s ease forwards;
+  opacity: 0;
+}
+
+.hero-content p {
+  color: #fff;
+  font-size: 1.2rem;
+  margin: 1.5rem 0;
+  animation: fadeInUp 1s ease 0.4s forwards;
+  opacity: 0;
+}
+
+.hero-content a {
+  display: inline-block;
+  background-color: #004d99;
+  color: #fff;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  animation: fadeInUp 1s ease 0.8s forwards;
+  opacity: 0;
+  transform: translateY(0) scale(1);
+  transition: background-color 0.5s ease, color 0.3s ease;
+}
+
+.hero-content a:hover,
+.hero-content:focus {
+  opacity: 1;
+  color: #1a1a1a;
+  background-color: #ffa500;
+}
+
+.hero-content a:focus-visible {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25), 0 0 0 3px rgba(255, 165, 0, 0.18);
+}
+
+/* Main Content */
+
+.container {
+  max-width: 1100px;
+  padding: 0 1rem;
+  margin: 0 auto;
+}
+
+main h2 {
+  text-align: center;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.services-block {
+  background: #fff;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  animation: fadeInUp 1s ease forwards;
+}
+
+.services-block:nth-child(1) {
+  animation-delay: 1s;
+}
+
+.services-block:nth-child(2) {
+  animation-delay: 1.2s;
+}
+
+.services-block:nth-child(3) {
+  animation-delay: 1.4s;
+}
+
+.services-block h3 {
+  color: #004d99;
+  margin-bottom: 0.5rem;
+}
+
+.services-block p {
+  color: #333;
+}
+
+.portfolio-item {
+  margin-bottom: 2rem;
+  overflow: hidden;
+  border-radius: 8px;
+
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+
+  transition: all 0.3s ease; /* Makes the lift smooth */
+}
+
+.portfolio-item:hover {
+  transform: translateY(-5px); /* This provides the 'lift' */
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2); /* This deepens the shadow */
+}
+
+.portfolio-item:hover img {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+.portfolio-item img {
+  width: 100%;
+  border-radius: 8px 8px 0 0;
+  transition: all 0.3s ease;
+}
+
+.portfolio-item h3 {
+  color: #004d99;
+  margin-top: 0.5rem;
+  padding-left: 1.2rem;
+  padding-right: 1.2rem;
+}
+
+.portfolio-item p {
+  color: #444;
+  padding: 0 1.2rem 1.5rem 1.2rem;
+}
+
+@media (min-width: 768px) {
+  .services-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .services-block {
+    flex-basis: 30%;
+  }
+
+  .portfolio-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .portfolio-item {
+    flex-basis: 30%;
+    margin: 0;
+    max-width: none;
+  }
+}
+
+.testimonial {
+  background-color: #ffffff;
+  padding: 1.5rem;
+  margin-bottom: 3rem;
+  border: 1px solid #e1e8ed;
+  border-radius: 16px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.testimonial blockquote {
+  font-style: normal;
+  color: #1a1a1a;
+  margin-top: 1rem;
+  line-height: 1.4;
+}
+
+.author-details {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.author-text {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1rem;
+}
+
+.author-text strong {
+  font-size: 1.1rem;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+/* .author-details strong {
+  display: block;
+  font-size: 1.1rem;
+  margin-left: 1rem;
+  color: #004d99;
+} */
+
+.author-details img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Footer Styles */
+
+footer {
+  background-color: #1a1a1a;
+  color: #fff;
+  padding: 1rem 0;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+footer h2 {
+  padding: 0;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem; /* Shrinks the gap under the title */
+  font-size: 1.8rem; /* Optional: makes the footer heading a bit smaller */
+}
+
+footer p {
+  margin: 0.2rem 0; /* Keeps the lines of text close together */
+}
+
+footer a {
+  color: #ffa500;
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: #fff;
+  cursor: pointer;
+}
+
+.quick-links ul {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 0;
+  margin: 1rem 0;
+  list-style: none;
+}
+
+address {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  font-style: normal;
+  line-height: 1.6;
+}
+
+.cta-button {
+  display: inline-block;
+  background-color: #004d99;
+  color: #fff;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.5s ease, color 0.3s ease;
+}
+
+.cta-button:hover {
+  background-color: #ffa500;
+  color: #1a1a1a;
+}
+
+.love {
+  font-size: 0.9rem;
+}
