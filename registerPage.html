@@ -1,227 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Register Page</title>
-    <link rel="stylesheet" href="styles.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    />
-  </head>
 
-  <body>
-    <div class="register-container">
-      <h1>Register</h1>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register Page</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+</head>
 
-      <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
-        <div class="form-group">
-          <label for="name">Full Name</label>
-          <input 
-            type="text" 
-            id="name" 
-            name="name" 
-            required 
-            minlength="2"
-            maxlength="100"
-            pattern="[A-Za-z\s]+"
-            title="Please enter a valid name (letters and spaces only)"
-            placeholder="Enter your full name"
-            aria-required="true"
-          />
-          <span class="error-message" id="name-error"></span>
-        </div>
+<body>
+  <div class="register-container">
+    <h1>Register</h1>
 
-        <div class="form-group">
-          <label for="email">Email Address</label>
-          <input 
-            type="email" 
-            id="email" 
-            name="email" 
-            required 
-            title="Please enter a valid email address"
-            placeholder="your.email@example.com"
-            aria-required="true"
-          />
-          <span class="error-message" id="email-error"></span>
-        </div>
+    <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" required minlength="2" maxlength="100" pattern="[A-Za-z\s]+"
+          title="Please enter a valid name (letters and spaces only)" placeholder="Enter your full name"
+          aria-required="true" />
+        <span class="error-message" id="name-error"></span>
+      </div>
 
-        <div class="form-group">
-          <label for="project-type">Project Type</label>
-          <select 
-            name="project-type" 
-            id="project-type"
-            required
-            aria-required="true"
-          >
-            <option value="" disabled selected>Select a project type</option>
-            <option value="commercial">Commercial</option>
-            <option value="residential">Residential</option>
-            <option value="industrial">Industrial</option>
-          </select>
-          <span class="error-message" id="project-error"></span>
-        </div>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" required title="Please enter a valid email address"
+          placeholder="your.email@example.com" aria-required="true" />
+        <span class="error-message" id="email-error"></span>
+      </div>
 
-        <div class="form-group">
-          <label for="details">Project Details</label>
-          <textarea
-            id="details"
-            name="details"
-            rows="4"
-            required
-            minlength="10"
-            maxlength="1000"
-            placeholder="Provide a brief description of your project (minimum 10 characters)"
-            aria-required="true"
-          ></textarea>
-          <span class="error-message" id="details-error"></span>
-        </div>
+      <div class="form-group">
+        <label for="project-type">Project Type</label>
+        <select name="project-type" id="project-type" required aria-required="true">
+          <option value="" disabled selected>Select a project type</option>
+          <option value="commercial">Commercial</option>
+          <option value="residential">Residential</option>
+          <option value="industrial">Industrial</option>
+        </select>
+        <span class="error-message" id="project-error"></span>
+      </div>
 
-        <button type="submit" aria-label="Submit registration form">Submit</button>
-        <div class="back-link">
-          <a href="index.html"
-            ><i class="fa-solid fa-arrow-left"></i>Back to Home</a
-          >
-        </div>
-      </form>
+      <div class="form-group">
+        <label for="details">Project Details</label>
+        <textarea id="details" name="details" rows="4" required minlength="10" maxlength="1000"
+          placeholder="Provide a brief description of your project (minimum 10 characters)"
+          aria-required="true"></textarea>
+        <span class="error-message" id="details-error"></span>
+      </div>
 
-      <footer class="footer-container">
-        <div class="footer-grid">
-          <div class="footer-brand">
-            <img
-              src="assets/ChatGPT Image Dec 15, 2025, 02_38_05 AM.png"
-              alt="Alpha Builders Logo"
-              class="footer-logo"
-              loading="lazy"
-              width="50"
-              height="50"
-            />
-            <p>Building excellence since 2010</p>
-            <div class="social-icons">
-              <a href="#"><i class="fa-brands fa-facebook"></i></a>
-              <a href="https://www.instagram.com/azumah3272/"
-                ><i class="fa-brands fa-instagram"></i
-              ></a>
-              <a href="https://www.linkedin.com/in/isaac-azumah-21b680388"
-                ><i class="fa-brands fa-linkedin"></i
-              ></a>
-            </div>
-          </div>
+      <button type="submit" aria-label="Submit registration form">Submit</button>
+      <div class="back-link">
+        <a href="index.html"><i class="fa-solid fa-arrow-left"></i>Back to Home</a>
+      </div>
+    </form>
 
-          <div class="footer-contact">
-            <h3>Contact Us</h3>
-            <p>
-              <a href="https://maps.google.com"
-                ><i class="fa-solid fa-location-dot"></i> 1234 Builder St,
-                Construct City</a
-              >
-            </p>
-            <p>
-              <a href="tel:+2330500872328"
-                ><i class="fa-solid fa-phone"></i> (+233) 0500-872-328</a
-              >
-            </p>
-            <p>
-              <a href="mailto:info@alphabuilders.com"
-                ><i class="fa-solid fa-envelope"></i> info@alphabuilders.com</a
-              >
-            </p>
+    <footer class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="assets/ChatGPT Image Dec 15, 2025, 02_38_05 AM.png" alt="Alpha Builders Logo" class="footer-logo"
+            loading="lazy" width="50" height="50" />
+          <p>Building excellence since 2010</p>
+          <div class="social-icons">
+            <a href="#"><i class="fa-brands fa-facebook"></i></a>
+            <a href="https://www.instagram.com/azumah3272/"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/in/isaac-azumah-21b680388"><i class="fa-brands fa-linkedin"></i></a>
           </div>
         </div>
 
-        <div class="footer-bottom">
-          <p>&copy; 2025 Alpha Builders. All rights reserved.</p>
+        <div class="footer-contact">
+          <h3>Contact Us</h3>
+          <p>
+            <a href="https://maps.google.com"><i class="fa-solid fa-location-dot"></i> 1234 Builder St,
+              Construct City</a>
+          </p>
+          <p>
+            <a href="tel:+2330500872328"><i class="fa-solid fa-phone"></i> (+233) 0500-872-328</a>
+          </p>
+          <p>
+            <a href="mailto:info@alphabuilders.com"><i class="fa-solid fa-envelope"></i> info@alphabuilders.com</a>
+          </p>
         </div>
-      </footer>
-    </div>
+      </div>
 
-    <!-- Form Validation Script -->
-    <script>
-      // Form validation and submission handling
-      const form = document.querySelector('form');
-      const nameInput = document.getElementById('name');
-      const emailInput = document.getElementById('email');
-      const projectSelect = document.getElementById('project-type');
-      const detailsInput = document.getElementById('details');
+      <div class="footer-bottom">
+        <p>&copy; 2025 Alpha Builders. All rights reserved.</p>
+      </div>
+    </footer>
+  </div>
 
-      // Validate individual fields
-      function validateField(field, errorElementId, rules) {
-        const errorElement = document.getElementById(errorElementId);
-        let isValid = true;
-        let errorMessage = '';
+  <!-- Form Validation Script -->
+  <script>
+    // Form validation and submission handling
+    const form = document.querySelector('form');
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const projectSelect = document.getElementById('project-type');
+    const detailsInput = document.getElementById('details');
 
-        if (rules.required && !field.value.trim()) {
-          isValid = false;
-          errorMessage = `${field.labels[0].textContent.trim()} is required`;
-        } else if (rules.minlength && field.value.length < rules.minlength) {
-          isValid = false;
-          errorMessage = `Minimum ${rules.minlength} characters required`;
-        } else if (rules.pattern && !new RegExp(rules.pattern).test(field.value)) {
-          isValid = false;
-          errorMessage = field.title || 'Invalid input';
-        } else if (field.type === 'email' && field.value && !field.validity.valid) {
-          isValid = false;
-          errorMessage = 'Please enter a valid email address';
-        }
+    // Validate individual fields
+    function validateField(field, errorElementId, rules) {
+      const errorElement = document.getElementById(errorElementId);
+      let isValid = true;
+      let errorMessage = '';
 
-        if (isValid) {
-          field.classList.remove('error');
-          if (errorElement) errorElement.textContent = '';
-        } else {
-          field.classList.add('error');
-          if (errorElement) errorElement.textContent = errorMessage;
-        }
-
-        return isValid;
+      if (rules.required && !field.value.trim()) {
+        isValid = false;
+        errorMessage = `${field.labels[0].textContent.trim()} is required`;
+      } else if (rules.minlength && field.value.length < rules.minlength) {
+        isValid = false;
+        errorMessage = `Minimum ${rules.minlength} characters required`;
+      } else if (rules.pattern && !new RegExp(rules.pattern).test(field.value)) {
+        isValid = false;
+        errorMessage = field.title || 'Invalid input';
+      } else if (field.type === 'email' && field.value && !field.validity.valid) {
+        isValid = false;
+        errorMessage = 'Please enter a valid email address';
       }
 
-      // Real-time validation
-      nameInput.addEventListener('blur', () => {
-        validateField(nameInput, 'name-error', { 
-          required: true, 
-          minlength: 2,
-          pattern: '[A-Za-z\\s]+'
-        });
+      if (isValid) {
+        field.classList.remove('error');
+        if (errorElement) errorElement.textContent = '';
+      } else {
+        field.classList.add('error');
+        if (errorElement) errorElement.textContent = errorMessage;
+      }
+
+      return isValid;
+    }
+
+    // Real-time validation
+    nameInput.addEventListener('blur', () => {
+      validateField(nameInput, 'name-error', {
+        required: true,
+        minlength: 2,
+        pattern: '[A-Za-z\\s]+'
+      });
+    });
+
+    emailInput.addEventListener('blur', () => {
+      validateField(emailInput, 'email-error', { required: true });
+    });
+
+    projectSelect.addEventListener('change', () => {
+      validateField(projectSelect, 'project-error', { required: true });
+    });
+
+    detailsInput.addEventListener('blur', () => {
+      validateField(detailsInput, 'details-error', {
+        required: true,
+        minlength: 10
+      });
+    });
+
+    // Form submission
+    form.addEventListener('submit', (e) => {
+      // Validate all fields
+      const isNameValid = validateField(nameInput, 'name-error', {
+        required: true,
+        minlength: 2,
+        pattern: '[A-Za-z\\s]+'
+      });
+      const isEmailValid = validateField(emailInput, 'email-error', { required: true });
+      const isProjectValid = validateField(projectSelect, 'project-error', { required: true });
+      const isDetailsValid = validateField(detailsInput, 'details-error', {
+        required: true,
+        minlength: 10
       });
 
-      emailInput.addEventListener('blur', () => {
-        validateField(emailInput, 'email-error', { required: true });
-      });
+      // If any field is invalid, prevent form submission
+      if (!isNameValid || !isEmailValid || !isProjectValid || !isDetailsValid) {
+        e.preventDefault();
+        alert('Please fix the errors in the form before submitting.');
+      }
+      // If all fields valid, form submits to the action URL (Formspree or your backend)
+    });
+  </script>
+</body>
 
-      projectSelect.addEventListener('change', () => {
-        validateField(projectSelect, 'project-error', { required: true });
-      });
-
-      detailsInput.addEventListener('blur', () => {
-        validateField(detailsInput, 'details-error', { 
-          required: true, 
-          minlength: 10
-        });
-      });
-
-      // Form submission
-      form.addEventListener('submit', (e) => {
-        // Validate all fields
-        const isNameValid = validateField(nameInput, 'name-error', { 
-          required: true, 
-          minlength: 2,
-          pattern: '[A-Za-z\\s]+'
-        });
-        const isEmailValid = validateField(emailInput, 'email-error', { required: true });
-        const isProjectValid = validateField(projectSelect, 'project-error', { required: true });
-        const isDetailsValid = validateField(detailsInput, 'details-error', { 
-          required: true, 
-          minlength: 10
-        });
-
-        // If any field is invalid, prevent form submission
-        if (!isNameValid || !isEmailValid || !isProjectValid || !isDetailsValid) {
-          e.preventDefault();
-          alert('Please fix the errors in the form before submitting.');
-        }
-        // If all fields valid, form submits to the action URL (Formspree or your backend)
-      });
-    </script>
-  </body>
 </html>

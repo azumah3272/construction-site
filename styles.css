@@ -122,12 +122,12 @@ header {
     url("assets/hero-banner.jpg"); /* Dark overlay on background image for readability */
   background-size: cover; /* Make image cover entire header */
   background-position: center; /* Center the background image */
-  
+
   /* PERFORMANCE OPTIMIZATION: These properties improve rendering efficiency */
   background-attachment: scroll; /* Prevents expensive parallax effects */
   will-change: background-image; /* Hints browser to optimize this element */
   contain: layout style paint; /* Isolates element for paint optimization */
-  
+
   /* NOTE: For further optimization:
      1. Consider converting hero-banner.jpg to WebP format
      2. Use a smaller image (consider max 1200px width)
@@ -204,13 +204,17 @@ nav img {
   transition-delay: 0.3s; /* Third card animates 0.3s later */
 }
 
-.animate-on-scroll:nth-child(n+4).in-view {
+.animate-on-scroll:nth-child(n + 4).in-view {
   transition-delay: 0.1s; /* Additional cards animate with 0.1s delay */
 }
 
 /* Hero heading with gradient text effect */
 .hero-content h1 {
-  background-image: linear-gradient(180deg, #cccccc, #004d99); /* Gradient from gray to blue */
+  background-image: linear-gradient(
+    180deg,
+    #cccccc,
+    #004d99
+  ); /* Gradient from gray to blue */
 
   font-size: 2.5rem; /* Large heading size */
   font-weight: 700; /* Bold weight */
@@ -284,7 +288,7 @@ main h2 {
   border-radius: 8px; /* Rounded corners */
   text-align: center; /* Center content */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-  
+
   /* ANIMATION: Now uses scroll-triggered fade-up via JavaScript Intersection Observer */
   /* Removed initial opacity: 0 and animation - handled by animate-on-scroll class in JS */
 }
@@ -334,7 +338,7 @@ main h2 {
   width: 100%; /* Full width of card */
   border-radius: 8px 8px 0 0; /* Rounded top corners only */
   transition: all 0.3s ease; /* Smooth transitions */
-  
+
   /* PERFORMANCE: Images use native lazy loading with loading="lazy" attribute in HTML */
   /* Alt text improves accessibility and provides fallback content */
   /* Explicit width/height attributes prevent layout shift (Cumulative Layout Shift - CLS) */
@@ -498,7 +502,7 @@ form {
   padding: 2rem; /* Internal padding */
   border-radius: 8px; /* Rounded corners */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  
+
   /* PERFORMANCE: Form uses HTML5 native validation (novalidate) with JavaScript fallback
      This provides immediate feedback without server round-trips during form interaction */
 }
@@ -766,8 +770,6 @@ button[type="submit"]:hover {
     text-align: left; /* Left-align text */
   }
 }
-
-
 
 main h2 {
   text-align: center;
