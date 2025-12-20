@@ -15,25 +15,52 @@
     <div class="register-container">
       <h1>Register</h1>
 
-      <form action="">
+      <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
         <div class="form-group">
           <label for="name">Full Name</label>
-          <input type="text" id="name" name="name" required />
+          <input 
+            type="text" 
+            id="name" 
+            name="name" 
+            required 
+            minlength="2"
+            maxlength="100"
+            pattern="[A-Za-z\s]+"
+            title="Please enter a valid name (letters and spaces only)"
+            placeholder="Enter your full name"
+            aria-required="true"
+          />
+          <span class="error-message" id="name-error"></span>
         </div>
 
         <div class="form-group">
           <label for="email">Email Address</label>
-          <input type="email" id="email" name="email" required />
+          <input 
+            type="email" 
+            id="email" 
+            name="email" 
+            required 
+            title="Please enter a valid email address"
+            placeholder="your.email@example.com"
+            aria-required="true"
+          />
+          <span class="error-message" id="email-error"></span>
         </div>
 
         <div class="form-group">
           <label for="project-type">Project Type</label>
-          <select name="project-type" id="project-type">
+          <select 
+            name="project-type" 
+            id="project-type"
+            required
+            aria-required="true"
+          >
             <option value="" disabled selected>Select a project type</option>
             <option value="commercial">Commercial</option>
             <option value="residential">Residential</option>
             <option value="industrial">Industrial</option>
           </select>
+          <span class="error-message" id="project-error"></span>
         </div>
 
         <div class="form-group">
@@ -42,11 +69,16 @@
             id="details"
             name="details"
             rows="4"
-            placeholder="Provide a brief description of your project"
+            required
+            minlength="10"
+            maxlength="1000"
+            placeholder="Provide a brief description of your project (minimum 10 characters)"
+            aria-required="true"
           ></textarea>
+          <span class="error-message" id="details-error"></span>
         </div>
 
-        <button type="submit">Submit</button>
+        <button type="submit" aria-label="Submit registration form">Submit</button>
         <div class="back-link">
           <a href="index.html"
             ><i class="fa-solid fa-arrow-left"></i>Back to Home</a
@@ -61,6 +93,9 @@
               src="assets/ChatGPT Image Dec 15, 2025, 02_38_05 AM.png"
               alt="Alpha Builders Logo"
               class="footer-logo"
+              loading="lazy"
+              width="50"
+              height="50"
             />
             <p>Building excellence since 2010</p>
             <div class="social-icons">
@@ -100,5 +135,93 @@
         </div>
       </footer>
     </div>
+
+    <!-- Form Validation Script -->
+    <script>
+      // Form validation and submission handling
+      const form = document.querySelector('form');
+      const nameInput = document.getElementById('name');
+      const emailInput = document.getElementById('email');
+      const projectSelect = document.getElementById('project-type');
+      const detailsInput = document.getElementById('details');
+
+      // Validate individual fields
+      function validateField(field, errorElementId, rules) {
+        const errorElement = document.getElementById(errorElementId);
+        let isValid = true;
+        let errorMessage = '';
+
+        if (rules.required && !field.value.trim()) {
+          isValid = false;
+          errorMessage = `${field.labels[0].textContent.trim()} is required`;
+        } else if (rules.minlength && field.value.length < rules.minlength) {
+          isValid = false;
+          errorMessage = `Minimum ${rules.minlength} characters required`;
+        } else if (rules.pattern && !new RegExp(rules.pattern).test(field.value)) {
+          isValid = false;
+          errorMessage = field.title || 'Invalid input';
+        } else if (field.type === 'email' && field.value && !field.validity.valid) {
+          isValid = false;
+          errorMessage = 'Please enter a valid email address';
+        }
+
+        if (isValid) {
+          field.classList.remove('error');
+          if (errorElement) errorElement.textContent = '';
+        } else {
+          field.classList.add('error');
+          if (errorElement) errorElement.textContent = errorMessage;
+        }
+
+        return isValid;
+      }
+
+      // Real-time validation
+      nameInput.addEventListener('blur', () => {
+        validateField(nameInput, 'name-error', { 
+          required: true, 
+          minlength: 2,
+          pattern: '[A-Za-z\\s]+'
+        });
+      });
+
+      emailInput.addEventListener('blur', () => {
+        validateField(emailInput, 'email-error', { required: true });
+      });
+
+      projectSelect.addEventListener('change', () => {
+        validateField(projectSelect, 'project-error', { required: true });
+      });
+
+      detailsInput.addEventListener('blur', () => {
+        validateField(detailsInput, 'details-error', { 
+          required: true, 
+          minlength: 10
+        });
+      });
+
+      // Form submission
+      form.addEventListener('submit', (e) => {
+        // Validate all fields
+        const isNameValid = validateField(nameInput, 'name-error', { 
+          required: true, 
+          minlength: 2,
+          pattern: '[A-Za-z\\s]+'
+        });
+        const isEmailValid = validateField(emailInput, 'email-error', { required: true });
+        const isProjectValid = validateField(projectSelect, 'project-error', { required: true });
+        const isDetailsValid = validateField(detailsInput, 'details-error', { 
+          required: true, 
+          minlength: 10
+        });
+
+        // If any field is invalid, prevent form submission
+        if (!isNameValid || !isEmailValid || !isProjectValid || !isDetailsValid) {
+          e.preventDefault();
+          alert('Please fix the errors in the form before submitting.');
+        }
+        // If all fields valid, form submits to the action URL (Formspree or your backend)
+      });
+    </script>
   </body>
 </html>

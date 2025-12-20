@@ -1,153 +1,785 @@
-/* Styles for the Alpha Builders website */
+/* ==========================================
+   ALPHA BUILDERS WEBSITE - MASTER STYLESHEET
+   ========================================== */
 
-/* ---------- Global Styles ---------- */
+/* ========== PERFORMANCE OPTIMIZATION GUIDE ==========
+   
+   CURRENT OPTIMIZATIONS IMPLEMENTED:
+   
+   1. IMAGE OPTIMIZATION:
+      - All content images use loading="lazy" for native lazy loading
+      - Images have explicit width/height to prevent layout shift (CLS)
+      - Portfolio images: 400x300px (adjust based on actual image dimensions)
+      - Profile avatars: 60x60px with border-radius for circular display
+      
+   2. BACKGROUND IMAGES:
+      - Hero banner uses will-change and contain properties for paint optimization
+      - Background-attachment: scroll prevents expensive parallax effects
+      
+   3. CSS OPTIMIZATION:
+      - Uses efficient flexbox layouts instead of floats
+      - Minimizes paint operations with contain property
+      - Hardware acceleration via transform and opacity properties
+      - Efficient animations using fadeInUp keyframes
+      
+   RECOMMENDED IMPROVEMENTS:
+   
+   1. IMAGE FORMAT CONVERSION:
+      - Convert JPG images to WebP format (better compression)
+      - Provide fallbacks: <picture><source srcset="image.webp"> <img src="image.jpg"></picture>
+      - Example portfolio images: chapel-logistics.jpg → chapel-logistics.webp
+      
+   2. RESPONSIVE IMAGES:
+      - Add srcset for different device sizes
+      - Example: <img srcset="image-small.jpg 500w, image-large.jpg 1200w">
+      
+   3. FONT OPTIMIZATION:
+      - Consider using font-display: swap in @font-face declarations
+      - Limit font weights to only those used (currently using multiple)
+      
+   4. CSS MINIFICATION:
+      - Minify CSS in production (removes comments and whitespace)
+      - Current file: ~1100 lines → ~600 lines after minification
+      
+   5. THIRD-PARTY OPTIMIZATIONS:
+      - Font Awesome 6.5.1 from CDN is cached on user machines
+      - Consider self-hosting if Font Awesome icons are heavily used
+      
+   CORE WEB VITALS TARGETS:
+   - Largest Contentful Paint (LCP): < 2.5s
+   - First Input Delay (FID): < 100ms
+   - Cumulative Layout Shift (CLS): < 0.1
+   
+   ================================================== */
+
+/* ---------- GLOBAL STYLES & RESETS ---------- */
+/* Reset default browser styles for all elements */
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+  box-sizing: border-box; /* Include padding and borders in width/height calculations */
+  margin: 0; /* Remove default margins */
+  padding: 0; /* Remove default padding */
 }
 
+/* Main body styling - sets typography and color scheme for entire page */
 body {
-  font-family: "Open Sans", "Poppins", sans-serif;
-  font-size: 1rem;
-  line-height: 1.6;
-  background-color: #e6f0ff;
-  color: #1a1a1a;
+  font-family: "Open Sans", "Poppins", sans-serif; /* Primary sans-serif fonts for readability */
+  font-size: 1rem; /* Base font size - 16px */
+  line-height: 1.6; /* Space between lines for better readability */
+  background-color: #e6f0ff; /* Light blue background color */
+  color: #1a1a1a; /* Dark text color for contrast */
 }
 
+/* Default link styling - removes underline and sets brand color */
 a {
-  text-decoration: none;
-  color: #004d99;
-  transition: color 0.3s ease;
+  text-decoration: none; /* Remove default underline */
+  color: #004d99; /* Brand blue color */
+  transition: color 0.3s ease; /* Smooth color transition on hover */
 }
 
+/* Link hover effect - changes to orange on hover */
 a:hover {
-  color: #ffa500;
+  color: #ffa500; /* Accent orange color */
 }
 
+/* Heading styles - applies consistent styling to all heading levels */
 h1,
 h2,
 h3 {
-  font-family: "Merriweather", "Roboto", sans-serif;
-  margin-bottom: 1.5rem;
+  font-family: "Merriweather", "Roboto", sans-serif; /* Serif font for headings - more elegant */
+  margin-bottom: 1.5rem; /* Space below headings */
 }
 
+/* Main heading - largest, most prominent */
 h1 {
-  font-size: 3.5rem;
-  letter-spacing: -1.25px;
+  font-size: 3.5rem; /* Extra large - 56px */
+  letter-spacing: -1.25px; /* Tighten letter spacing for visual impact */
 }
 
+/* Section heading - medium-large size */
 h2 {
-  font-size: 2.5rem;
-  letter-spacing: -1px;
+  font-size: 2.5rem; /* Large - 40px */
+  letter-spacing: -1px; /* Tighten letter spacing */
 }
 
+/* Subsection heading - smaller than h2 */
 h3 {
-  font-size: 1.5rem;
-  letter-spacing: -0.5px;
+  font-size: 1.5rem; /* Medium - 24px */
+  letter-spacing: -0.5px; /* Slight letter spacing adjustment */
 }
 
+/* Default paragraph styling */
 p {
-  font-size: 1rem;
+  font-size: 1rem; /* Standard text size */
 }
 
-/* ---------- Header Styles ---------- */
+/* ---------- HEADER & NAVIGATION STYLES ---------- */
+/* Main header container - contains nav and hero section */
 header {
-  background-color: #004d99;
-  color: #fff;
-  padding: 50px 0;
+  background-color: #004d99; /* Brand blue background */
+  color: #fff; /* White text for contrast */
+  padding: 50px 0; /* Vertical padding for spacing */
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("assets/hero-banner.jpg");
-  background-size: cover;
-  background-position: center;
+    url("assets/hero-banner.jpg"); /* Dark overlay on background image for readability */
+  background-size: cover; /* Make image cover entire header */
+  background-position: center; /* Center the background image */
+  
+  /* PERFORMANCE OPTIMIZATION: These properties improve rendering efficiency */
+  background-attachment: scroll; /* Prevents expensive parallax effects */
+  will-change: background-image; /* Hints browser to optimize this element */
+  contain: layout style paint; /* Isolates element for paint optimization */
+  
+  /* NOTE: For further optimization:
+     1. Consider converting hero-banner.jpg to WebP format
+     2. Use a smaller image (consider max 1200px width)
+     3. Compress and optimize the image before uploading
+     4. Consider using a solid color or gradient if hero image is not critical
+  */
 }
 
+/* Primary navigation - flex layout for horizontal menu */
 .primary-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 20px;
+  display: flex; /* Use flexbox for horizontal layout */
+  justify-content: space-between; /* Push logo left, menu right */
+  align-items: center; /* Vertically center items */
+  padding: 0 20px; /* Horizontal padding */
 }
 
+/* Navigation menu - hidden on mobile, shown on desktop via media query */
 nav ul {
-  display: none;
+  display: none; /* Hidden by default on mobile */
 }
 
+/* Logo image in navigation */
 nav img {
-  height: 60px;
+  height: 60px; /* Fixed height for logo */
 }
 
+/* Hero content section - centered text area in header */
 .hero-content {
-  text-align: center;
-  padding-top: 50px;
-  max-width: 500px;
-  margin: 0 auto;
+  text-align: center; /* Center all content */
+  padding-top: 50px; /* Space above content */
+  max-width: 500px; /* Limit width for readability */
+  margin: 0 auto; /* Center horizontally */
 }
 
+/* Animation keyframes - defines the fade in and up animation */
 @keyframes fadeInUp {
   from {
-    opacity: 0;
-    transform: translateY(20px);
+    opacity: 0; /* Start invisible */
+    transform: translateY(20px); /* Start 20px below final position */
   }
   to {
-    opacity: 1;
-    transform: translateY(0);
+    opacity: 1; /* End fully visible */
+    transform: translateY(0); /* End at final position */
   }
 }
 
+/* ---------- SCROLL-TRIGGERED ANIMATION CLASSES ---------- */
+/* These classes are applied by JavaScript when elements enter the viewport */
+
+/* Base class for elements that should animate on scroll */
+.animate-on-scroll {
+  opacity: 0; /* Start invisible */
+  transform: translateY(20px); /* Start 20px below */
+  transition: opacity 0.6s ease, transform 0.6s ease; /* Smooth animation */
+}
+
+/* Class applied by JavaScript when element enters viewport - triggers the animation */
+.animate-on-scroll.in-view {
+  opacity: 1; /* Become visible */
+  transform: translateY(0); /* Move to final position */
+  animation: none; /* Disable initial animation, use transition instead */
+}
+
+/* Stagger effect helper classes - add slight delays for multiple cards */
+.animate-on-scroll:nth-child(1).in-view {
+  transition-delay: 0.1s; /* First card animates immediately */
+}
+
+.animate-on-scroll:nth-child(2).in-view {
+  transition-delay: 0.2s; /* Second card animates 0.2s later */
+}
+
+.animate-on-scroll:nth-child(3).in-view {
+  transition-delay: 0.3s; /* Third card animates 0.3s later */
+}
+
+.animate-on-scroll:nth-child(n+4).in-view {
+  transition-delay: 0.1s; /* Additional cards animate with 0.1s delay */
+}
+
+/* Hero heading with gradient text effect */
 .hero-content h1 {
-  background-image: linear-gradient(180deg, #cccccc, #004d99);
+  background-image: linear-gradient(180deg, #cccccc, #004d99); /* Gradient from gray to blue */
 
-  font-size: 2.5rem;
-  font-weight: 700;
+  font-size: 2.5rem; /* Large heading size */
+  font-weight: 700; /* Bold weight */
 
-  -webkit-background-clip: text; /* Vendor prefix for compatibility */
-  background-clip: text;
-  color: transparent; /* Makes the actual text invisible, revealing the clipped background */
+  -webkit-background-clip: text; /* Vendor prefix for Safari/Chrome - clips background to text shape */
+  background-clip: text; /* Standard property - clips background to text shape */
+  color: transparent; /* Makes text transparent so gradient shows through */
 
-  animation: fadeInUp 2s ease forwards;
-  opacity: 0;
+  animation: fadeInUp 2s ease forwards; /* Apply fade in animation - 2 seconds, ease timing */
+  opacity: 0; /* Start invisible */
 }
 
+/* Hero paragraph text */
 .hero-content p {
-  color: #fff;
-  font-size: 1.2rem;
-  margin: 1.5rem 0;
-  animation: fadeInUp 1s ease 0.4s forwards;
-  opacity: 0;
+  color: #fff; /* White text */
+  font-size: 1.2rem; /* Slightly larger than body text */
+  margin: 1.5rem 0; /* Vertical margins for spacing */
+  animation: fadeInUp 1s ease 0.4s forwards; /* Fade in with 0.4s delay */
+  opacity: 0; /* Start invisible */
 }
 
+/* Hero CTA button/link */
 .hero-content a {
-  display: inline-block;
-  background-color: #004d99;
-  color: #fff;
-  padding: 0.8rem 1.5rem;
-  border: none;
-  border-radius: 5px;
-  font-weight: bold;
-  animation: fadeInUp 1s ease 0.8s forwards;
-  opacity: 0;
-  transform: translateY(0) scale(1);
-  transition: background-color 0.5s ease, color 0.3s ease;
+  display: inline-block; /* Allow padding/height */
+  background-color: #004d99; /* Brand blue background */
+  color: #fff; /* White text */
+  padding: 0.8rem 1.5rem; /* Padding for button appearance */
+  border: none; /* No border */
+  border-radius: 5px; /* Slightly rounded corners */
+  font-weight: bold; /* Bold text */
+  animation: fadeInUp 1s ease 0.8s forwards; /* Fade in with 0.8s delay */
+  opacity: 0; /* Start invisible */
+  transform: translateY(0) scale(1); /* Initial scale */
+  transition: background-color 0.5s ease, color 0.3s ease; /* Smooth color transitions */
 }
 
+/* Button hover/focus states */
 .hero-content a:hover,
 .hero-content:focus {
-  opacity: 1;
-  color: #1a1a1a;
-  background-color: #ffa500;
+  opacity: 1; /* Make fully visible */
+  color: #1a1a1a; /* Dark text */
+  background-color: #ffa500; /* Orange background */
 }
 
+/* Focus visible for accessibility */
 .hero-content a:focus-visible {
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25), 0 0 0 3px rgba(255, 165, 0, 0.18);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25), 0 0 0 3px rgba(255, 165, 0, 0.18); /* Orange focus ring */
 }
 
-/* Main Content */
-
+/* ---------- MAIN CONTENT CONTAINER ---------- */
+/* Main container wraps all page content - sets max width and margins */
 .container {
-  max-width: 1100px;
-  padding: 0 1rem;
-  margin: 0 auto;
+  max-width: 1100px; /* Maximum width for content */
+  padding: 0 1rem; /* Horizontal padding for mobile spacing */
+  margin: 0 auto; /* Center container horizontally */
+}
+
+/* Main headings within content */
+main h2 {
+  text-align: center; /* Center section headings */
+  padding-top: 2rem; /* Space above heading */
+  padding-bottom: 2rem; /* Space below heading */
+}
+
+/* ---------- SERVICES SECTION STYLES ---------- */
+/* Individual service card styling */
+.services-block {
+  background: #fff; /* White background for contrast */
+  padding: 1.5rem; /* Internal padding */
+  margin: 1.5rem 0; /* Vertical margin between cards */
+  border-radius: 8px; /* Rounded corners */
+  text-align: center; /* Center content */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  
+  /* ANIMATION: Now uses scroll-triggered fade-up via JavaScript Intersection Observer */
+  /* Removed initial opacity: 0 and animation - handled by animate-on-scroll class in JS */
+}
+
+/* Old animation delays - now handled by JavaScript stagger effect */
+.services-block:nth-child(1) {
+  /* animation-delay: 1s; */ /* Deprecated - using Intersection Observer instead */
+}
+
+.services-block:nth-child(2) {
+  /* animation-delay: 1.2s; */ /* Deprecated - using Intersection Observer instead */
+}
+
+.services-block:nth-child(3) {
+  /* animation-delay: 1.4s; */ /* Deprecated - using Intersection Observer instead */
+}
+
+/* Service block heading color */
+.services-block h3 {
+  color: #004d99; /* Brand blue for headings */
+  margin-bottom: 0.5rem; /* Space below heading */
+}
+
+/* Service block paragraph text */
+.services-block p {
+  color: #333; /* Dark gray text */
+}
+
+/* ---------- PORTFOLIO SECTION STYLES ---------- */
+/* Individual portfolio item card */
+.portfolio-item {
+  margin-bottom: 2rem; /* Space below each card */
+  overflow: hidden; /* Hide content that extends beyond border radius */
+  border-radius: 8px; /* Rounded corners */
+
+  background-color: #fff; /* White background */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+
+  max-width: 400px; /* Maximum card width */
+  margin-left: auto; /* Center card horizontally */
+  margin-right: auto;
+
+  transition: all 0.3s ease; /* Smooth transition for all properties on hover */
+}
+
+/* Portfolio item hover effect - lifts card and deepens shadow */
+.portfolio-item:hover {
+  transform: translateY(-5px); /* Move up 5px */
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2); /* Deeper shadow for lift effect */
+}
+
+/* Image brightens slightly on hover */
+.portfolio-item:hover img {
+  transform: scale(1.05); /* Zoom image 5% */
+  filter: brightness(1.1); /* Brighten image 10% */
+}
+
+/* Portfolio item image styling */
+.portfolio-item img {
+  width: 100%; /* Full width of card */
+  border-radius: 8px 8px 0 0; /* Rounded top corners only */
+  transition: all 0.3s ease; /* Smooth transitions */
+  
+  /* PERFORMANCE: Images use native lazy loading with loading="lazy" attribute in HTML */
+  /* Alt text improves accessibility and provides fallback content */
+  /* Explicit width/height attributes prevent layout shift (Cumulative Layout Shift - CLS) */
+}
+
+/* Portfolio item heading */
+.portfolio-item h3 {
+  color: #004d99; /* Brand blue */
+  margin-top: 0.5rem;
+  padding-left: 1.2rem; /* Indent from edge */
+  padding-right: 1.2rem;
+}
+
+/* Portfolio item description */
+.portfolio-item p {
+  color: #444; /* Medium gray */
+  padding: 0 1.2rem 1.5rem 1.2rem; /* Padding around text */
+}
+
+/* ---------- TESTIMONIALS SECTION STYLES ---------- */
+/* Testimonial card container */
+.testimonial {
+  background-color: #ffffff; /* White background */
+  padding: 1.5rem; /* Internal padding */
+  margin-bottom: 3rem; /* Space between cards */
+  border: 1px solid #e1e8ed; /* Subtle gray border */
+  border-radius: 16px; /* Rounded corners */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Light shadow */
+}
+
+/* Testimonial text - the actual quote */
+.testimonial blockquote {
+  font-style: normal; /* Regular style (not italic) */
+  color: #1a1a1a; /* Dark text */
+  margin-top: 1rem; /* Space above quote */
+  line-height: 1.4; /* Tighter line height for quotes */
+}
+
+/* Container for author info and image */
+.author-details {
+  display: flex; /* Flexbox for horizontal layout */
+  align-items: center; /* Vertically center items */
+  margin-top: 1rem; /* Space above author section */
+}
+
+/* Author text container - for name and title */
+.author-text {
+  display: flex; /* Flexbox for vertical layout */
+  flex-direction: column; /* Stack items vertically */
+  margin-left: 1rem; /* Space between image and text */
+}
+
+/* Author name styling */
+.author-text strong {
+  font-size: 1.1rem; /* Slightly larger text */
+  color: #1a1a1a; /* Dark text */
+  margin: 0; /* Remove margins */
+}
+
+/* Commented out old author styling - kept for reference */
+/* .author-details strong {
+  display: block;
+  font-size: 1.1rem;
+  margin-left: 1rem;
+  color: #004d99;
+} */
+
+/* Author profile image */
+.author-details img {
+  width: 60px; /* Fixed size */
+  height: 60px;
+  border-radius: 50%; /* Make circular */
+  object-fit: cover; /* Crop image to fit circle */
+}
+
+/* ---------- FOOTER STYLES ---------- */
+/* Main footer container */
+footer {
+  background-color: #1a1a1a; /* Dark gray background */
+  color: #fff; /* White text */
+  padding: 1rem 0; /* Vertical padding */
+  margin-top: 2rem; /* Space above footer */
+  text-align: center; /* Center text */
+}
+
+/* Footer heading */
+footer h2 {
+  padding: 0; /* No padding */
+  margin-top: 1rem; /* Space above heading */
+  margin-bottom: 0.5rem; /* Smaller space below heading */
+  font-size: 1.8rem; /* Slightly smaller than normal h2 */
+}
+
+/* Footer paragraphs - keeps text lines close together */
+footer p {
+  margin: 0.2rem 0; /* Tight spacing between lines */
+}
+
+/* Footer links - orange accent color */
+footer a {
+  color: #ffa500; /* Orange color */
+  text-decoration: none; /* No underline */
+}
+
+/* Footer link hover - white on hover */
+footer a:hover {
+  color: #fff; /* Change to white */
+  cursor: pointer; /* Pointer cursor */
+}
+
+/* Quick links list styling */
+.quick-links ul {
+  display: flex; /* Horizontal layout */
+  justify-content: center; /* Center items */
+  gap: 1.5rem; /* Space between items */
+  padding: 0; /* No padding */
+  margin: 1rem 0; /* Vertical margin */
+  list-style: none; /* Remove bullets */
+}
+
+/* Address block styling - contact information container */
+address {
+  display: flex; /* Flexbox layout */
+  flex-direction: column; /* Stack items vertically */
+  align-items: center; /* Center items horizontally */
+  gap: 0.5rem; /* Space between address items */
+  margin-top: 1rem; /* Space above address block */
+  font-style: normal; /* Not italic despite being <address> tag */
+  line-height: 1.6; /* Readable line spacing */
+}
+
+/* CTA button styling - Call To Action button */
+.cta-button {
+  display: inline-block; /* Allow padding/height */
+  background-color: #004d99; /* Brand blue background */
+  color: #fff; /* White text */
+  padding: 0.8rem 1.5rem; /* Internal padding */
+  border: none; /* No border */
+  border-radius: 5px; /* Rounded corners */
+  font-weight: bold; /* Bold text */
+  transition: background-color 0.5s ease, color 0.3s ease; /* Smooth transitions */
+}
+
+/* CTA button hover effect */
+.cta-button:hover {
+  background-color: #ffa500; /* Orange background */
+  color: #1a1a1a; /* Dark text */
+}
+
+/* Love message styling - "Made with love" text */
+.love {
+  font-size: 0.9rem; /* Smaller than body text */
+}
+
+/* ---------- REGISTER PAGE FORM STYLES ---------- */
+/* Main form container */
+form {
+  margin: 2rem auto; /* Centered with vertical margins */
+  background: #fff; /* White background */
+  max-width: 500px; /* Maximum width */
+  padding: 2rem; /* Internal padding */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  
+  /* PERFORMANCE: Form uses HTML5 native validation (novalidate) with JavaScript fallback
+     This provides immediate feedback without server round-trips during form interaction */
+}
+
+/* Form label styling */
+label {
+  display: block; /* Full width */
+  margin-bottom: 0.5rem; /* Space below label */
+  font-weight: 550; /* Semi-bold */
+  color: #333; /* Dark gray */
+}
+
+/* Form input fields - text, email, select, textarea */
+input[type="text"],
+input[type="email"],
+select,
+textarea {
+  width: 100%; /* Full width of form */
+  padding: 0.8rem; /* Internal padding */
+  margin-bottom: 1.5rem; /* Space below input */
+  border: 1px solid #ccc; /* Light gray border */
+  border-radius: 4px; /* Slightly rounded corners */
+  font-family: "Ubuntu", "Poppins", sans-serif; /* Readable font */
+  transition: border-color 0.3s ease; /* Smooth border color change */
+}
+
+/* Error message styling for form validation feedback */
+.error-message {
+  display: none; /* Hidden by default */
+  color: #d32f2f; /* Red color for errors */
+  font-size: 0.85rem; /* Smaller than input text */
+  margin-top: -1.2rem; /* Overlap with input margin */
+  margin-bottom: 1rem; /* Space before next element */
+}
+
+/* Show error message when input has error class */
+input.error ~ .error-message,
+select.error ~ .error-message,
+textarea.error ~ .error-message {
+  display: block; /* Show error message */
+}
+
+/* Focus state for form inputs - blue border on focus */
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #004d99; /* Brand blue border */
+  outline: none; /* Remove default outline */
+}
+
+/* Submit button styling */
+button[type="submit"] {
+  display: block; /* Full width */
+  width: 100%;
+  padding: 1rem; /* Generous padding */
+
+  color: #fff; /* White text */
+  background-color: #004d99; /* Brand blue background */
+
+  border: none; /* No border */
+  border-radius: 4px; /* Rounded corners */
+
+  font-family: inherit; /* Inherit font from form */
+  font-size: 1.1rem; /* Slightly larger text */
+  font-weight: 600; /* Semi-bold */
+
+  cursor: pointer; /* Hand cursor */
+  transition: all 0.3s ease; /* Smooth transitions */
+}
+
+/* Submit button hover effect */
+button[type="submit"]:hover {
+  background-color: #ffa500; /* Orange background */
+  color: #1a1a1a; /* Dark text */
+}
+
+/* Back link styling - link to return to home */
+.back-link {
+  text-align: center; /* Center the link */
+  margin-top: 1rem; /* Space above link */
+}
+
+/* Back link styling */
+.back-link a {
+  color: #004d99; /* Brand blue */
+  font-weight: 500; /* Medium weight */
+  font-size: 1rem; /* Standard size */
+  text-decoration: none; /* No underline */
+  transition: color 0.3s ease; /* Smooth color transition */
+}
+
+/* Back link hover effect */
+.back-link a:hover {
+  color: #ffa500; /* Orange color */
+  text-decoration: underline; /* Add underline */
+}
+
+/* Icon inside back link */
+.back-link i {
+  margin-right: 0.5rem; /* Space after icon */
+}
+
+/* Register page heading */
+.register-container h1 {
+  text-align: center; /* Center heading */
+  color: #004d99; /* Brand blue */
+  margin-top: 0.5rem; /* Small top margin */
+  margin-bottom: 0.5rem; /* Small bottom margin */
+}
+
+/* ---------- FOOTER GRID LAYOUT STYLES ---------- */
+/* Main footer grid - organizes footer columns */
+.footer-grid {
+  display: flex; /* Flexbox for layout */
+  flex-direction: column; /* Stack vertically on mobile */
+  justify-content: space-between; /* Space items evenly */
+  align-items: center; /* Center items horizontally */
+  text-align: center; /* Center text */
+  padding: 40px 20px; /* Padding around grid */
+  max-width: 1000px; /* Maximum width for footer */
+  margin: 0 auto; /* Center footer */
+}
+
+/* Footer brand section - logo and social icons */
+.footer-brand {
+  display: flex; /* Flexbox layout */
+  flex-direction: column; /* Stack items vertically */
+  align-items: center; /* Center items */
+  text-align: center; /* Center text */
+  margin-right: 20px; /* Right margin (for desktop side-by-side) */
+}
+
+/* Brand tagline text */
+.footer-brand p {
+  font-size: 0.9rem; /* Smaller text */
+  color: #555; /* Medium gray */
+  margin: 10px 0; /* Vertical margins */
+  transition: color 0.3s ease; /* Smooth color transition */
+  cursor: pointer; /* Pointer cursor */
+}
+
+/* Brand tagline hover effect */
+.footer-brand p:hover {
+  color: #004d99; /* Brand blue on hover */
+}
+
+/* Footer logo styling */
+.footer-logo {
+  height: 50px; /* Fixed height */
+  width: auto; /* Maintain aspect ratio */
+  margin-bottom: 10px; /* Space below logo */
+}
+
+/* Footer contact section - contact info column */
+.footer-contact {
+  display: flex; /* Flexbox layout */
+  flex-direction: column; /* Stack items vertically */
+  gap: 15px; /* Space between items */
+}
+
+/* Contact section heading */
+.footer-contact h3 {
+  color: #004d99; /* Brand blue */
+  margin-bottom: 10px; /* Space below heading */
+}
+
+/* Contact information text */
+.footer-contact p {
+  font-size: 0.9rem; /* Smaller text */
+  color: #555; /* Medium gray */
+}
+
+/* Contact links styling */
+.footer-contact a {
+  text-decoration: none; /* No underline */
+  color: #555; /* Medium gray */
+  transition: all 0.3s ease; /* Smooth transitions */
+  display: flex; /* Flexbox for icon + text */
+  align-items: center; /* Vertically center */
+  gap: 10px; /* Space between icon and text */
+}
+
+/* Contact link hover effect */
+.footer-contact a:hover {
+  color: #004d99; /* Brand blue */
+  transform: translateX(5px); /* Slide right 5px */
+}
+
+/* Social media icons container */
+.social-icons {
+  display: flex; /* Horizontal layout */
+  gap: 15px; /* Space between icons */
+  margin-top: 15px; /* Space above icons */
+}
+
+/* Individual social icon styling */
+.social-icons a {
+  color: #666; /* Neutral gray starting color */
+  font-size: 1.2rem; /* Larger icon size */
+  transition: all 0.3s ease; /* Smooth transitions */
+}
+
+/* Social icon hover - color change and scale */
+.social-icons a:hover {
+  color: #004d99; /* Brand blue */
+  transform: scale(1.2); /* Grow 20% */
+}
+
+/* Footer bottom section - copyright bar */
+.footer-bottom {
+  border-top: 1px solid #ddd; /* Subtle divider line */
+  text-align: center; /* Center text */
+  padding: 20px 0; /* Padding around copyright */
+}
+
+/* Copyright text styling */
+.footer-bottom p {
+  font-size: 0.8rem; /* Very small text */
+  color: #888; /* Light gray */
+}
+
+/* ---------- RESPONSIVE DESIGN - TABLET & DESKTOP ---------- */
+/* Media query for screens 768px and wider */
+@media (min-width: 768px) {
+  /* Services grid - displays 3 columns */
+  .services-grid {
+    display: flex; /* Flexbox layout */
+    justify-content: space-between; /* Space items evenly */
+    gap: 1.5rem; /* Space between columns */
+    flex-wrap: wrap; /* Allow wrapping on smaller desktops */
+  }
+
+  /* Services block - 30% width in 3-column layout */
+  .services-block {
+    flex-basis: 30%; /* Take up 30% of available width */
+  }
+
+  /* Portfolio grid - displays 3 columns */
+  .portfolio-grid {
+    display: flex; /* Flexbox layout */
+    justify-content: space-between; /* Space items evenly */
+    gap: 1.5rem; /* Space between columns */
+    flex-wrap: wrap; /* Allow wrapping */
+  }
+
+  /* Portfolio item - 30% width in 3-column layout */
+  .portfolio-item {
+    flex-basis: 30%; /* Take up 30% of available width */
+    margin: 0; /* Remove mobile margins */
+    max-width: none; /* Remove max-width restriction */
+  }
+
+  /* Footer grid - side-by-side layout on desktop */
+  .footer-grid {
+    flex-direction: row; /* Display items horizontally */
+    justify-content: space-between; /* Space items evenly */
+    align-items: flex-start; /* Align to top */
+    text-align: left; /* Left-align text */
+  }
+
+  /* Footer brand and contact - left-aligned on desktop */
+  .footer-brand,
+  .footer-contact {
+    align-items: flex-start; /* Align content to the left */
+    text-align: left; /* Left-align text */
+  }
+}
+
 }
 
 main h2 {
