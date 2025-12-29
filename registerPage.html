@@ -4,28 +4,33 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Register Page</title>
+  <meta name="description"
+    content="Register your construction project with Alpha Builders. Get a free consultation for commercial, residential, and industrial projects." />
+  <meta name="robots" content="index, follow">
+  <title>Project Registration | Alpha Builders - Construction Excellence</title>
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 </head>
 
 <body>
   <div class="register-container">
-    <h1>Register</h1>
+    <h1>Register Your Project</h1>
+    <p style="text-align: center; color: #666; margin-bottom: 2rem;">Get in touch with our team for a free consultation
+    </p>
 
     <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
       <div class="form-group">
         <label for="name">Full Name</label>
         <input type="text" id="name" name="name" required minlength="2" maxlength="100" pattern="[A-Za-z\s]+"
           title="Please enter a valid name (letters and spaces only)" placeholder="Enter your full name"
-          aria-required="true" />
+          aria-required="true" autocomplete="name" />
         <span class="error-message" id="name-error"></span>
       </div>
 
       <div class="form-group">
         <label for="email">Email Address</label>
         <input type="email" id="email" name="email" required title="Please enter a valid email address"
-          placeholder="your.email@example.com" aria-required="true" />
+          placeholder="your.email@example.com" aria-required="true" autocomplete="email" />
         <span class="error-message" id="email-error"></span>
       </div>
 
@@ -36,6 +41,7 @@
           <option value="commercial">Commercial</option>
           <option value="residential">Residential</option>
           <option value="industrial">Industrial</option>
+          <option value="other">Other</option>
         </select>
         <span class="error-message" id="project-error"></span>
       </div>
@@ -43,41 +49,48 @@
       <div class="form-group">
         <label for="details">Project Details</label>
         <textarea id="details" name="details" rows="4" required minlength="10" maxlength="1000"
-          placeholder="Provide a brief description of your project (minimum 10 characters)"
-          aria-required="true"></textarea>
+          placeholder="Provide a brief description of your project (minimum 10 characters)" aria-required="true"
+          autocomplete="off"></textarea>
         <span class="error-message" id="details-error"></span>
       </div>
 
-      <button type="submit" aria-label="Submit registration form">Submit</button>
+      <button type="submit" aria-label="Submit registration form">Submit Registration</button>
       <div class="back-link">
-        <a href="index.html"><i class="fa-solid fa-arrow-left"></i>Back to Home</a>
+        <a href="index.html"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
       </div>
     </form>
+  </div>
 
-    <footer class="footer-container">
+  <footer id="contact" role="contentinfo">
+    <div class="footer-container">
       <div class="footer-grid">
         <div class="footer-brand">
           <img src="assets/ChatGPT Image Dec 15, 2025, 02_38_05 AM.png" alt="Alpha Builders Logo" class="footer-logo"
             loading="lazy" width="50" height="50" />
           <p>Building excellence since 2010</p>
           <div class="social-icons">
-            <a href="#"><i class="fa-brands fa-facebook"></i></a>
-            <a href="https://www.instagram.com/azumah3272/"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://www.linkedin.com/in/isaac-azumah-21b680388"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="https://www.facebook.com/alphabuilders" aria-label="Facebook" title="Visit our Facebook page"><i
+                class="fa-brands fa-facebook"></i></a>
+            <a href="https://www.instagram.com/azumah3272/" aria-label="Instagram"
+              title="Visit our Instagram profile"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/in/isaac-azumah-21b680388" aria-label="LinkedIn"
+              title="Visit our LinkedIn profile"><i class="fa-brands fa-linkedin"></i></a>
           </div>
         </div>
 
         <div class="footer-contact">
           <h3>Contact Us</h3>
           <p>
-            <a href="https://maps.google.com"><i class="fa-solid fa-location-dot"></i> 1234 Builder St,
-              Construct City</a>
+            <a href="https://maps.google.com" rel="noopener noreferrer" target="_blank"
+              title="View our location on Google Maps"><i class="fa-solid fa-location-dot"></i> 100 Innovation Drive,
+              CityVille, TX 77001</a>
           </p>
           <p>
-            <a href="tel:+2330500872328"><i class="fa-solid fa-phone"></i> (+233) 0500-872-328</a>
+            <a href="tel:+11234567890" title="Call us"><i class="fa-solid fa-phone"></i> (123) 456-7890</a>
           </p>
           <p>
-            <a href="mailto:info@alphabuilders.com"><i class="fa-solid fa-envelope"></i> info@alphabuilders.com</a>
+            <a href="mailto:info@alphabuilders.com" title="Send us an email"><i class="fa-solid fa-envelope"></i>
+              info@alphabuilders.com</a>
           </p>
         </div>
       </div>
@@ -85,8 +98,8 @@
       <div class="footer-bottom">
         <p>&copy; 2025 Alpha Builders. All rights reserved.</p>
       </div>
-    </footer>
-  </div>
+    </div>
+  </footer>
 
   <!-- Form Validation Script -->
   <script>
